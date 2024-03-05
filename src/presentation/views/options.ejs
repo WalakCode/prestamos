@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prestamos</title>
+</head>
+<body>
+    <% if (message) { %>
+        <h1><%= message %>!</h1>
+      <% } %>
+    <form action="/user" method="post">
+        <h1>agrega un usuario</h1>
+        <button>usuario</button>
+    </form>
+    <form action="/loans" method="post">
+        <h1>crea un prestamos</h1>
+        <button>prestamos</button>
+    </form>
+    <form action="/reports" method="post">
+        <h1>ve los reportes</h1>
+        <button>reportes</button>
+    </form>
+</body>
+</html>

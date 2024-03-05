@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prestamos</title>
+</head>
+<body>
+    <form action="/createUser" method="post">
+        nombre
+        <input type="text" name="name">
+        apellido
+        <input type="text" name="lastname">
+        cedula
+        <input type="number" name="id">
+        numero
+        <input type="number" name="phone">
+        <button>registrar</button>
+    </form>
+    <% if (error) { %>
+        <h1><%= error %>!</h1>
+      <% } %>
+</body>
+</html>

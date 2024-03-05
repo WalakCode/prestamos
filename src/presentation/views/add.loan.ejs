@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prestamos</title>
+</head>
+<body>
+    <form action="/createLoan" method="post">
+        monto
+        <input type="number" name="amount">
+        porcentaje de prestamos
+        <select name="percentage">
+            <option value="" disabled selected>Selecciona un porcentaje</option>
+            <% for (var i = 1; i <= 100; i++) { %>
+                <option value="<%= i %>"><%= i %>%</option>
+            <% } %>
+        </select>
+        cuotas
+        <select name="fee_frequency">
+            <option value="" disabled selected>Selecciona una frecuencia</option>
+            <% const frecuencias = ['diario', 'quincenal', 'mensual', 'anual']; %>
+            <% for (const frecuencia of frecuencias) { %>
+                <option value="<%= frecuencia %>"><%= frecuencia.charAt(0).toUpperCase() + frecuencia.slice(1) %></option>
+            <% } %>
+        </select>
+        candidad de cuotas 
+        <input type="number" name="fee" >
+        <button>registralo </button>
+    </form>
+    <% if (error) { %>
+        <h1><%= error %>!</h1>
+      <% } %>
+</body>
+</html>

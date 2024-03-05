@@ -1,29 +1,11 @@
 const createConnection = require('../../config/db')
 
-const getUsers = async()=>{
+const addLoan = async(data)=>{
     const db = await createConnection();
     try {
       const result = await db.query(
         `
-        SELECT id_usuarios,cedula FROM usuarios
-        `,
-      );
-      return result;
-    } catch (error) {
-      console.log(error);
-      return null;
-    } finally {
-      await db.end();
-    }
-}
-
-
-const addUser = async(data)=>{
-    const db = await createConnection();
-    try {
-      const result = await db.query(
-        `
-        INSERT INTO usuarios (nombre,apellido,cedula,numero) values (?,?,?,?)
+        INSERT INTO prestamos (usuario, monto, porcentaje, cuotas, forma_de_pago ,estado, fecha_registro, fecha_limite) values (?,?,?,?,?,'activo',NOW(),?)
         `,
         data
       );
@@ -36,12 +18,12 @@ const addUser = async(data)=>{
     }
 }
 
-const getID = async(id)=>{
+const getLoans = async(id)=>{
     const db = await createConnection();
     try {
       const result = await db.query(
         `
-        SELECT * FROM usuarios WHERE cedula = ?
+        SELECT * FROM prestamos WHERE usuario = ?
         `,
         id
       );
@@ -54,10 +36,7 @@ const getID = async(id)=>{
     }
 }
 
-
-
 module.exports = {
-    getUsers,
-    addUser,
-    getID,
+    addLoan,
+    getLoans
 }

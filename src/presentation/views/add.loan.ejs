@@ -7,6 +7,13 @@
 </head>
 <body>
     <form action="/createLoan" method="post">
+        usuario
+        <select id="cedula" name="id">
+            <option value="" disabled selected>Selecciona una cedula</option>
+            <% for (const usuario of usuarios) { %>
+              <option value="<%= usuario.id_usuarios %>"><%= usuario.cedula %></option>
+            <% } %>
+          </select>
         monto
         <input type="number" name="amount">
         porcentaje de prestamos

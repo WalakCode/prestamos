@@ -46,11 +46,21 @@ const postCreateUser = async(req,res)=>{
 
 const postLoan = async(req,res)=>{
     let error = null
-    res.render('add.loan.ejs',{error})
+    const usuarios = await userService.getUsers()
+    res.render('add.loan.ejs',{error,usuarios})
 }
 
 const postCreateLoan = async(req,res)=>{
-    
+    const data = req.body
+    const result = await userService.addLoan(data)
+    if(result.status == 200){
+        const message = result.message
+        res.render('options.ejs',{message})
+    }else{
+        const usuarios = await userService.getUsers()
+        const error = result.message
+        res.render('add.loan.ejs',{error,usuarios})
+    }
 }
 
 module.exports = {

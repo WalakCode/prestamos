@@ -12,8 +12,7 @@ const authToken = async (req, res, next) => {
   }
   if (token) {
     try {
-      const result = jwt.verify(token,'SECRETUNIQUEKEY');
-      req.result = result;
+      jwt.verify(token,'SECRETUNIQUEKEY');
       next();
     } catch (errors) {
       let error = null

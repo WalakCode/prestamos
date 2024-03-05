@@ -1,6 +1,6 @@
 const userRepository = require('../persistence/repository/user.respository')
 
-const authID = async(req , res, next)=>{
+const authUser = async(req , res, next)=>{
     const id = req.body.id
     const result = await userRepository.getID(id)
     if(result){
@@ -17,5 +17,5 @@ const authID = async(req , res, next)=>{
 }
 
 module.exports = {
-    authID
+    authUser
 }

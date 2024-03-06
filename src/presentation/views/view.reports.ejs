@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prestamos</title>
+</head>
+<body>
+    <% if (error) { %>
+        <h1><%= error %>!</h1>
+      <% } %>
+<table>
+    <thead>
+      <tr>
+        <th>Nombre completo</th>
+        <th>Cédula</th>
+        <th>Número Telefonico</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (const persona of info) { %>
+        <tr>
+          <td><%= persona['Nombre completo'] %></td>
+          <td><%= persona.cedula %></td>
+          <td><%= persona.numero %></td>
+          <td><%= persona.estado %></td>
+          <td>
+            <button>Ver reporte De prestamos</button>
+            <button>Editar</button>
+            <button>desactivar</button>
+          </td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+
+  <form action="/allLoans" method="post">
+    <button>todos los prestamos activos</button>
+  </form>
+  
+</body>
+</html>

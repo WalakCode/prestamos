@@ -1,4 +1,6 @@
 const userService = require('../../business/services/user.services')
+const loanService = require('../../business/services/loan.services')
+const reportService = require('../../business/services/report.services')
 const jwt = require("jsonwebtoken");
 
 const getMain = async(req,res)=>{
@@ -52,7 +54,7 @@ const postLoan = async(req,res)=>{
 
 const postCreateLoan = async(req,res)=>{
     const data = req.body
-    const result = await userService.addLoan(data)
+    const result = await loanService.addLoan(data)
     if(result.status == 200){
         const message = result.message
         res.render('options.ejs',{message})
@@ -63,11 +65,37 @@ const postCreateLoan = async(req,res)=>{
     }
 }
 
+const postReports = async(req,res)=>{
+    const result = await reportService.getUserReports()
+    if(result.status == 200){
+        let error = null
+        const info = result.info
+        res.render('view.reports.ejs',{info,error})
+    }else{
+        const message = result.message
+        res.render('options.ejs',{message})
+    }
+
+}
+
+const postAllLoans = async(req,res)=>{
+    const result = await loanService.getAllActiveLoans()
+    if(result.status == 200){
+        const info = result.info
+        res.render('view.allActive.reports.ejs',{info})
+    }else{
+        const message = result.message
+        res.render('options.ejs',{message})
+    }
+}
+
 module.exports = {
     getMain,
     postLogin,
     postUser,
     postCreateUser,
     postLoan,
-    postCreateLoan
+    postCreateLoan,
+    postReports,
+    postAllLoans
 }

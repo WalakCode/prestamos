@@ -1,7 +1,5 @@
-Crear sistema de actividad e inactividad para los usuarios
-Validar espacios en blanco para el usuario y los prestamos
-Validar monto minimo 20.000 y maximo 20.000.000 
-Crear reportes visibles de todos los prestamos activos de todas las personas
+
 crear historial de prestamos por personas tanto activos como inactivos vencidos o cancelados
+
 crear manera de editar reportes de cada personas, los prestamos, anexar una descripcion, y la informacion del usuario
 crar reporte de ganancias 

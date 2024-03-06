@@ -1,42 +1,109 @@
-const createConnection = require('../../config/db')
+const createConnection = require("../../config/db");
 
-const addLoan = async(data)=>{
-    const db = await createConnection();
-    try {
-      const result = await db.query(
-        `
+const addLoan = async (data) => {
+  const db = await createConnection();
+  try {
+    const result = await db.query(
+      `
         INSERT INTO prestamos (usuario, monto, porcentaje, cuotas, forma_de_pago ,estado, fecha_registro, fecha_limite) values (?,?,?,?,?,'activo',NOW(),?)
         `,
-        data
-      );
-      return result;
-    } catch (error) {
-      console.log(error);
-      return null;
-    } finally {
-      await db.end();
-    }
-}
+      data
+    );
+    return result;
+  } catch (error) {
+    console.log(error);
+    return null;
+  } finally {
+    await db.end();
+  }
+};
 
-const getLoans = async(id)=>{
-    const db = await createConnection();
-    try {
-      const result = await db.query(
-        `
+const getLoans = async (id) => {
+  const db = await createConnection();
+  try {
+    const result = await db.query(
+      `
         SELECT * FROM prestamos WHERE usuario = ?
         `,
-        id
-      );
-      return result;
-    } catch (error) {
-      console.log(error);
-      return null;
-    } finally {
-      await db.end();
-    }
-}
+      id
+    );
+    return result;
+  } catch (error) {
+    console.log(error);
+    return null;
+  } finally {
+    await db.end();
+  }
+};
+
+const getState = async (id) => {
+  const db = await createConnection();
+  try {
+    const result = await db.query(
+      `
+      SELECT
+      CASE
+        WHEN estado = 0 THEN 'Activo'
+        WHEN estado = 1 THEN 'Inactivo'
+        ELSE 'Desconocido'
+      END AS estado
+    FROM
+      usuarios
+    WHERE
+      id_usuarios = ?
+      `,
+      id
+    );
+    return result;
+  } catch (error) {
+    console.log(error);
+    return null;
+  } finally {
+    await db.end();
+  }
+};
+
+const getAllActiveLoans = async (id) => {
+  const db = await createConnection();
+  try {
+    const result = await db.query(
+      `
+      SELECT
+  CONCAT(u.nombre, ' ', u.apellido) AS 'Nombre completo',
+  u.cedula,
+  p.monto,
+  p.porcentaje,
+  p.cuotas,
+  p.forma_de_pago,
+  CASE
+    WHEN p.estado = 0 THEN 'Activo'
+    WHEN p.estado = 1 THEN 'Inactivo'
+    ELSE 'Desconocido'
+  END AS estado_del_prestamo,
+  p.fecha_registro,
+  p.fecha_limite
+FROM
+  usuarios u
+JOIN
+  prestamos p ON u.id_usuarios = p.usuario
+WHERE
+  p.estado = 0; -- Solo préstamos activos
+
+      `,
+      id
+    );
+    return result;
+  } catch (error) {
+    console.log(error);
+    return null;
+  } finally {
+    await db.end();
+  }
+};
 
 module.exports = {
-    addLoan,
-    getLoans
-}
+  addLoan,
+  getLoans,
+  getState,
+  getAllActiveLoans
+};

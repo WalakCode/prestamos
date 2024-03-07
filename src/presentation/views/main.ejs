@@ -1,20 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prestamos</title>
-</head>
-<body>
-    <form action="/login" method="post">
-        usuario
-        <input type="text" name="user">
-        contraseña
-        <input type="text" name="pass">
-        <button>inicia</button>
-    </form>
-    <% if (error) { %>
-        <h1><%= error %>!</h1>
-      <% } %>
-</body>
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>Prestafacil</title>    
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Videojuegos & Desarrollo">
+        <meta name="description" content="Ejemplo de formulario de acceso basado en HTML5 y CSS">
+        <meta name="keywords" content="login,formulariode acceso html">
+        <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" type="text/css" href="/css/si.css">
+        <style type="text/css">
+        </style>
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+
+        <div id="contenedor">
+            <div id="contenedorcentrado">
+                <div id="login">
+                    <form id="loginform" action="/login" method="post">
+                        <label><STROng>Prestafacil</STROng></label>
+                        <label for="cedula">Usuario</label>
+                        <input id="cedula" type="text" name="user" placeholder="usuario" required>
+                        
+                        <label for="password">contraseña</label>
+                        <input id="password" type="text" placeholder="contraseña" name="pass" required>
+                        
+                        <button type="submit" title="Ingresar" name="Ingresar">Iniciar sesion</button>
+                    </form>
+                    
+                </div>
+                <div id="derecho">
+                    <div class="titulo">
+                        <% if (error) { %>
+                            <h1><%= error %>!</h1>
+                          <% } %>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </body>
 </html>
+
+

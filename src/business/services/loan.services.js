@@ -23,7 +23,6 @@ const addLoan = async (data) => {
       break;
   }
 
-
   const limit_date = new Date(today);
   limit_date.setDate(today.getDate() + frecuency);
 
@@ -59,18 +58,77 @@ const addLoan = async (data) => {
   }
 };
 
+const getAllActiveLoans = async () => {
+  const result = await loanRepository.getAllActiveLoans();
+  if (result) {
+    console.log(result[0]);
+    return {
+      message: "exito en la obtencion de prestamos actuivs",
+      status: "200",
+      info: result[0],
+    };
+  } else {
+    return { message: "error interno del servidor", status: "500" };
+  }
+};
 
-const getAllActiveLoans = async()=>{
-    const result = await loanRepository.getAllActiveLoans()
-     if(result){
-        console.log(result[0])
-        return { message: "exito en la obtencion de prestamos actuivs", status: "200",info:result[0]};
-     }else{
-        return { message: "error interno del servidor", status: "500" };
-     }
+const getProfit = async () => {
+    const result = await loanRepository.getAllProfit();
+    if (result) {
+      const info = result[0][0].ganancia_total
+      return { message: "exito", status: 200, info: info };
+    } else {
+      return { message: "error interno del servidor", status: "500" };
+    }
 }
+//   } else {
+//     const result = await loanRepository.getAllProfit();
+//     if (result) {
+//       const prestamos = result[0];
+
+//       console.log(prestamos);
+
+//       prestamos.forEach((prestamo) => {
+//         const monto = prestamo.monto;
+//         const porcentaje = prestamo.porcentaje;
+//         const cuotas = prestamo.cuotas;
+//         const formaPago = prestamo.forma_de_pago;
+
+//         let formfrecuency;
+//         switch (formaPago) {
+//           case "diario":
+//             formfrecuency = 1 
+//             break;
+//           case "quincenal":
+//             formfrecuency = 15 
+//             break;
+//           case "mensual":
+//             formfrecuency = 30 
+//             break;
+//           case "anual":
+//             formfrecuency = 365 
+//             break;
+//           default:
+//             break;
+//         }
+//         const gananciaCuota = (monto * porcentaje) / cuotas;
+//         const dias = prestamo.cuotas * formfrecuency
+
+//         const fecha_registro = prestamo.fecha_registro;
+ 
+
+
+//       });
+
+//       return { message: "exito", status: 200, info: gananciaTotal };
+//     } else {
+//       return { message: "error interno del servidor", status: "500" };
+//     }
+//   }
+// };
 
 module.exports = {
-    addLoan,
-    getAllActiveLoans
-}
+  addLoan,
+  getAllActiveLoans,
+  getProfit,
+};

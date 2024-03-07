@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prestafacil</title>
+</head>
+<body>
+    <style>
+        table {
+          border-collapse: collapse;
+          width: 100%;
+        }
+        th, td {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        th {
+          background-color: #f2f2f2;
+        }
+    </style>
+
+    <% if (info !== null) { %>
+      <h2>Tabla de Préstamos por persona</h2>
+      <table>
+        <thead>
+          <tr>
+            <% Object.keys(info[0]).forEach(key => { %>
+              <th><%= key %></th>
+            <% }); %>
+          </tr>
+        </thead>
+        <tbody>
+          <% info.forEach(item => { %>
+            <tr>
+              <% Object.values(item).forEach(value => { %>
+                <td><%= value %></td>
+              <% }); %>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    <% } else { %>
+      <p>No hay préstamos para este usuario.</p>
+    <% } %>
+</body>
+</html>

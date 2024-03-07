@@ -70,12 +70,27 @@ const postReports = async(req,res)=>{
     if(result.status == 200){
         let error = null
         const info = result.info
+        console.log(info)
         res.render('view.reports.ejs',{info,error})
     }else{
         const message = result.message
         res.render('options.ejs',{message})
     }
 
+}
+
+const postEachReport = async(req,res)=>{
+    const result = await reportService.getEachReports(req.body.id_usuarios)
+    if(result.status == 200){
+        const info = result.info
+        res.render('view.eachReport.ejs',{info})
+    }else if(result.status == 400){
+        const info = null
+        res.render('view.eachReport.ejs',{info})
+    }else{
+        const message = result.message
+        res.render('options.ejs',{message})
+    }
 }
 
 const postAllLoans = async(req,res)=>{
@@ -89,6 +104,22 @@ const postAllLoans = async(req,res)=>{
     }
 }
 
+const postProfit = async(req,res)=>{
+    const result = await loanService.getProfit()
+    if(result.status == 200){
+        const info = result.info
+        // const info =  Math.round(infodos);
+        console.log(info)
+        res.render('view.profits.ejs',{info})
+    }else{
+        const info = result.message
+        res.render('view.profits.ejs',{info})
+    }
+
+}
+
+
+
 module.exports = {
     getMain,
     postLogin,
@@ -97,5 +128,7 @@ module.exports = {
     postLoan,
     postCreateLoan,
     postReports,
-    postAllLoans
+    postEachReport,
+    postAllLoans,
+    postProfit,
 }

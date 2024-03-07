@@ -3,23 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prestamos</title>
+    <link rel="stylesheet" href="css/index_style.css">
+    <link rel="stylesheet" href="css/indexbody.css">
+    <link rel="stylesheet" href="css/footer-style.css">
+    <script src="https://kit.fontawesome.com/a2b25edcff.js" crossorigin="anonymous"></script>
+    <title>Prestafacil</title>
 </head>
 <body>
     <% if (message) { %>
-        <h1><%= message %>!</h1>
+        <h1 class="nose"><%= message %>!</h1>
       <% } %>
-    <form action="/user" method="post">
-        <h1>agrega un usuario</h1>
-        <button>usuario</button>
-    </form>
-    <form action="/loans" method="post">
-        <h1>crea un prestamos</h1>
-        <button>prestamos</button>
-    </form>
-    <form action="/reports" method="post">
-        <h1>ve los reportes</h1>
-        <button>reportes</button>
-    </form>
+
+<div class="container-icon">
+    <div class="icons">
+        <a>
+        <form action="/user" method="post">
+            <h1 class="inicio">USUARIO</h1>
+            <i class="fa-solid fa-user"></i>
+            <button class="options-button">USUARIO</button>
+        </form>
+       </a>
+
+       <a>
+        <form action="/loans" method="post">
+            <h1 class="prestamo" >PRESTAMOS</h1>
+            <i class="fa-solid fa-money-bill"></i>
+            <button class="options-button">prestamos</button>
+        </form>
+        </a>
+
+        <a>
+        <form action="/reports" method="post">
+            <h1 class="reportes" >REPORTES</h1>
+            <i class="fa-solid fa-bell"></i>
+            <button class="options-button">reportes</button>
+        </form>
+        </a>
+
+    </div>
+</div>
 </body>
 </html>

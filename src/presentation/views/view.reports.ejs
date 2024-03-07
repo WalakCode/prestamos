@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prestamos</title>
+    <title>Prestafacil</title>
 </head>
 <body>
     <% if (error) { %>
@@ -26,10 +26,11 @@
           <td><%= persona.cedula %></td>
           <td><%= persona.numero %></td>
           <td><%= persona.estado %></td>
-          <td>
-            <button>Ver reporte De prestamos</button>
-            <button>Editar</button>
-            <button>desactivar</button>
+          <td> 
+          <form method="POST" action="/eachReport">
+            <input type="hidden" name="id_usuarios" value="<%= persona.id_usuarios %>">
+            <button type="submit">Ver reporte De prestamos</button>
+          </form>
           </td>
         </tr>
       <% } %>
@@ -39,6 +40,8 @@
   <form action="/allLoans" method="post">
     <button>todos los prestamos activos</button>
   </form>
-  
+  <form action="/profits" method="post">
+    <button>ver ganancias</button
+  </form>
 </body>
 </html>

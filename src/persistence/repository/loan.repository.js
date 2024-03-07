@@ -101,9 +101,57 @@ WHERE
   }
 };
 
+const getProfit = async(days)=>{
+  const db = await createConnection();
+  try {
+    const result = await db.query(
+      `
+      SELECT monto, porcentaje, cuotas, forma_de_pago
+      FROM prestamos
+      WHERE estado = 'activo'
+      AND fecha_limite BETWEEN NOW() AND NOW() + INTERVAL ? DAY
+      LIMIT 25;      
+      `,
+      days
+    );
+    return result;
+  } catch (error) {
+    console.log(error);
+    return null;
+  } finally {
+    await db.end();
+  }
+}
+
+const getAllProfit = async()=>{
+  const db = await createConnection();
+  try {
+    const result = await db.query(
+      `
+      SELECT 
+      SUM((CAST(monto AS DECIMAL(10,2)) * CAST(porcentaje AS DECIMAL(10,2)) / 100)) AS ganancia_total
+  FROM 
+      prestamos;
+  
+    
+      `,
+    );
+    return result;
+  } catch (error) {
+    console.log(error);
+    return null;
+  } finally {
+    await db.end();
+  }
+}
+
+
+
 module.exports = {
   addLoan,
   getLoans,
   getState,
-  getAllActiveLoans
+  getAllActiveLoans,
+  getProfit,
+  getAllProfit
 };

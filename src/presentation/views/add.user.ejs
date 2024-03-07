@@ -3,22 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prestamos</title>
+    <title>Prestafacil</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <form action="/createUser" method="post">
-        nombre
-        <input type="text" name="name">
-        apellido
-        <input type="text" name="lastname">
-        cedula
-        <input type="number" name="id">
-        numero
-        <input type="number" name="phone">
-        <button>registrar</button>
-    </form>
     <% if (error) { %>
-        <h1><%= error %>!</h1>
+        <h1 class="fa fa-lock fa-stack-1x"><%= error %>!</h1>
       <% } %>
+
+<form class="login-form" action="/createUser" method="post">
+    <p class="login-text">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-lock fa-stack-1x"></i>
+        </span>
+    </p>
+    <input type="text" class="login-other" name="name" required="true" placeholder="Nombre" />
+    <input type="text" class="login-other" name="lastname" placeholder="Apellido" />
+    <input type="text" class="login-other" name="id" required="true" placeholder="Cedula" />
+    <input type="text" class="login-other" name="phone" required="true" placeholder="Numero" />
+    <button type="submit" name="Login" value="Registrar" class="login-submit">Registrar</button>
+</form>
+<div class="underlay-photo"></div>
+<div class="underlay-black"></div>
+
 </body>
 </html>
